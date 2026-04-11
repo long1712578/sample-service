@@ -1,0 +1,117 @@
+name: Deploy Develop
+
+#----------------------------------
+# sample-service: ...
+# Trigger : push to develop branch
+# Registry: ghcr.io/longpham1712578/sample-service
+#
+# BUILD ARGS bakes vào image lúc build.
+#   SEVER_BUILD             -> URL backend API (vas.SERVER_BUILD_DEVELOP)
+#   SAMPLE_SERVICE_PORT     -> port nginx lắng nghe (vas.SAMPLE_SERVICE_PORT)
+#
+#Secrets cần cấu hình (setting > secrets > Actions):
+#   DOCKER_USERNAME         -> username đăng nhập ghcr.io
+#   DOCKER_PASSWORD         -> token đăng nhập ghcr.io (personal access token có quyền read:packages, write:packages)
+#   BUILDER_SSH_HOST, BUILDER_SSH_USER, BUILDER_SSH_KEY, BUILDER_SSH_PORT -> thông tin ssh để kết nối tới builder server (nếu có)
+# lƯU Ý: (Không cần GITOPS_TOKKEN - dùng SHH key có sẵn trên runner)
+#
+# Variables cần cấu hình (setting > variables > Actions):
+#   SERVER_BUILD_DEVELOP    -> URL backend API develop
+#   SAMPLE_SERVICE_PORT     -> port nginx lắng nghe (mặc định 80)
+#----------------------------------
+on:
+  push:
+    branches:
+        - develop
+permissions:
+  contents: read
+  packages: write
+env:
+    SERVICE: sample-service
+    IMAGE: ghcr.io/longpham1712578/sample-service
+    GITOPS_REPO: longpham1712578/dragon-k8s-config
+    ENVIRONMENT: develop
+jobs:
+    build-and-push:
+        runs-on: [self-hosted, develop]
+        outputs:
+            image_tag: ${{ steps.meta.outputs.image_tag }}
+            full_image: ${{ steps.meta.outputs.full_image }}
+        steps:
+            - name: Checkout source
+              uses: actions/checkout@v4
+
+            - name: Generate image tag
+              id: meta
+              run: |
+                SHORT_SHA="${GITHUB_SHA:0:8}"
+                TAG="develop-${SHORT_SHA}"
+                echo "tag=$TAG" >> $GITHUB_OUTPUT
+                echo "full_image=${{ env.IMAGE }}:${TAG}" >> $GITHUB_OUTPUT
+            - name: Docker login ghcr.io
+              run: |
+                echo "${{ secrets.GITHUB_TOKEN }}" | \
+                    docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+            - name: Build image
+              run: |
+                docker build \
+                  --build-arg SERVER_BUILD=${{ vars.SERVER_BUILD_DEVELOP }} \
+                  --build-arg SAMPLE_SERVICE_PORT=${{ vars.SAMPLE_SERVICE_PORT }} \
+                  --build-arg VITE_BE_URL=${{ vars.VITE_BE_URL}} \
+                  -t "${{ env.IMAGE }}:${{ steps.meta.outputs.tag }}" \
+                  -t "${{ env.IMAGE }}:develop-latest" \
+                  -f Dockerfile .
+            - name: Push image
+              run: |
+                docker push "${{ env.IMAGE }}:${{ steps.meta.outputs.tag }}"
+                docker push "${{ env.IMAGE }}:develop-latest"
+                echo "Pushed ${{ env.IMAGE }}:${{ steps.meta.outputs.tag }}"
+            
+            - name: Set output for deploy job
+              if: always()
+              run: docker image prune -f
+    
+    update-k8s-manifest:
+        name: Update K8s Manifest
+        needs: build-and-push
+        runs-on: [self-hosted, develop]
+
+        steps:
+        - name: Clone k8s-config and update manifest
+          env:
+            NEW_IMAGE: ${{ needs.build-and-push.outputs.full_image }}
+            IMAGE_TAG: ${{ needs.build-and-push.outputs.image_tag }}
+          run: |
+            TMPDIR=$(mktemp -d)
+            git clone https://x-access-token:${{ secrets.GITOPS_TOKEN }}@github.com/${{ env.GITOPS_REPO }}.git "${TMPDIR}"
+            cd "${TMPDIR}"
+
+            TARGET="deploy/develop/${{ env.SERVICE }}.yaml"
+            sed -i "s|image: ghcr.io/longpham1712578/${{ env.SERVICE }}:.*|image: ${NEW_IMAGE}|g" "${TARGET}"
+
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add "${TARGET}"
+
+            if git diff --staged --quiet; then
+                echo "Image không đổi — bỏ qua commit."
+            else
+                git commit -m "deploy(develop): ${{ env.SERVICE }} → ${IMAGE_TAG} by ${{ github.actor }}"
+
+                for i in 1 2 3; do
+                git push && break || (git pull --rebase && sleep $((i * 3)))
+                done
+            fi
+
+            rm -rf "${TMPDIR}"
+
+        - name: Job Summary
+          run: |
+            {
+                echo "## Deploy Develop — ${{ env.SERVICE }}"
+                echo "| | |"
+                echo "|---|---|"
+                echo "| Image     | \`${{ needs.build-and-push.outputs.full_image }}\` |"
+                echo "| Triggered | \`${{ github.actor }}\` |"
+            } >> "$GITHUB_STEP_SUMMARY"

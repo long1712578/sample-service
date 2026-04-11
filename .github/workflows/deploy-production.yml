@@ -1,0 +1,106 @@
+name: Deploy Production
+
+#----------------------------------
+# sample-service: ...
+# Trigger : tạo tag qc_v* (ví dụ qc_v1.0.0)
+# Runner: self-hosted (chạy trên builder server)
+# Variables cần cấu hình (setting > variables > Actions):
+#   SERVER_BUILD_PRODUCTION    -> URL backend API production
+#   SAMPLE_SERVICE_PORT        -> port nginx lắng nghe (mặc định 80)
+#----------------------------------
+on:
+  push:
+    tags:
+        - "v[0-9]*" # v1.0.0
+permissions:
+  contents: read
+  packages: write
+env:
+    SERVICE: sample-service
+    IMAGE: ghcr.io/longpham1712578/sample-service
+    GITOPS_REPO: longpham1712578/dragon-k8s-config
+    ENVIRONMENT: production
+jobs:
+    build-and-push:
+        name: Build and Push Image (${{github.ref_name}})
+        runs-on: [self-hosted, linux]
+        outputs:
+            image_tag: ${{ steps.meta.outputs.image_tag }}
+            full_image: ${{ steps.meta.outputs.full_image }}
+        steps:
+            - name: Checkout source
+              uses: actions/checkout@v4
+
+            - name: Generate image tag from git tag
+              id: meta
+              run: |
+                TAG="production-${GITHUB_REF_NAME}"
+                echo "tag=${TAG}" >> $GITHUB_OUTPUT
+                echo "full_image=${{ env.IMAGE }}:${TAG}" >> $GITHUB_OUTPUT
+            - name: Docker login ghcr.io
+              run: |
+                echo "${{ secrets.GITHUB_TOKEN }}" | \
+                    docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+            - name: Build image
+              run: |
+                docker build \
+                  --build-arg SERVER_BUILD=${{ vars.SERVER_BUILD_PRODUCTION }} \
+                  --build-arg SAMPLE_SERVICE_PORT=${{ vars.SAMPLE_SERVICE_PORT }} \
+                  --build-arg VITE_BE_URL=${{ vars.VITE_BE_URL}} \
+                  -t "${{ env.IMAGE }}:${{ steps.meta.outputs.tag }}" \
+                  -t "${{ env.IMAGE }}:production-latest" \
+                  -f Dockerfile .
+            - name: Push image
+              run: |
+                docker push "${{ env.IMAGE }}:${{ steps.meta.outputs.tag }}"
+                docker push "${{ env.IMAGE }}:production-latest"
+                echo "Pushed ${{ env.IMAGE }}:${{ steps.meta.outputs.tag }}"
+            
+            - name: Set output for deploy job
+              if: always()
+              run: docker image prune -f
+    
+    update-k8s-manifest:
+        name: Update K8s Manifest
+        needs: build-and-push
+        runs-on: [self-hosted, production]
+
+        steps:
+        - name: Clone k8s-config and update manifest
+          env:
+            NEW_IMAGE: ${{ needs.build-and-push.outputs.full_image }}
+            IMAGE_TAG: ${{ needs.build-and-push.outputs.image_tag }}
+          run: |
+            TMPDIR=$(mktemp -d)
+            git clone https://x-access-token:${{ secrets.GITOPS_TOKEN }}@github.com/${{ env.GITOPS_REPO }}.git "${TMPDIR}"
+            cd "${TMPDIR}"
+
+            TARGET="deploy/production/${{ env.SERVICE }}.yaml"
+            sed -i "s|image: ghcr.io/longpham1712578/${{ env.SERVICE }}:.*|image: ${NEW_IMAGE}|g" "${TARGET}"
+
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add "${TARGET}"
+
+            if git diff --staged --quiet; then
+                echo "Image không đổi — bỏ qua commit."
+            else
+                git commit -m "deploy(production): ${{ env.SERVICE }} → ${IMAGE_TAG} by ${{ github.actor }}"
+
+                for i in 1 2 3; do
+                git push && break || (git pull --rebase && sleep $((i * 3)))
+                done
+            fi
+
+            rm -rf "${TMPDIR}"
+
+        - name: Job Summary
+          run: |
+            {
+                echo "## Deploy Production — ${{ env.SERVICE }}"
+                echo "| | |"
+                echo "|---|---|"
+                echo "| Image     | \`${{ needs.build-and-push.outputs.full_image }}\` |"
+                echo "| Triggered | \`${{ github.actor }}\` |"
+            } >> "$GITHUB_STEP_SUMMARY"
