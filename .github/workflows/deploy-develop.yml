@@ -22,7 +22,8 @@ name: Deploy Develop
 on:
   push:
     branches:
-        - develop
+      - develop
+      - master
 permissions:
   contents: read
   packages: write
