@@ -33,29 +33,30 @@ jobs:
 
             - name: Generate image tag from git tag
               id: meta
+              shell: bash
               run: |
                 TAG="production-${GITHUB_REF_NAME}"
-                echo "tag=${TAG}" >> $GITHUB_OUTPUT
+                echo "image_tag=${TAG}" >> $GITHUB_OUTPUT
                 echo "full_image=${{ env.IMAGE }}:${TAG}" >> $GITHUB_OUTPUT
             - name: Docker login ghcr.io
+              shell: bash
               run: |
                 echo "${{ secrets.GITHUB_TOKEN }}" | \
                     docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
             - name: Build image
+              shell: bash
               run: |
                 docker build \
-                  --build-arg SERVER_BUILD=${{ vars.SERVER_BUILD_PRODUCTION }} \
-                  --build-arg SAMPLE_SERVICE_PORT=${{ vars.SAMPLE_SERVICE_PORT }} \
-                  --build-arg VITE_BE_URL=${{ vars.VITE_BE_URL}} \
-                  -t "${{ env.IMAGE }}:${{ steps.meta.outputs.tag }}" \
+                  -t "${{ env.IMAGE }}:${{ steps.meta.outputs.image_tag }}" \
                   -t "${{ env.IMAGE }}:production-latest" \
                   -f Dockerfile .
             - name: Push image
+              shell: bash
               run: |
-                docker push "${{ env.IMAGE }}:${{ steps.meta.outputs.tag }}"
+                docker push "${{ env.IMAGE }}:${{ steps.meta.outputs.image_tag }}"
                 docker push "${{ env.IMAGE }}:production-latest"
-                echo "Pushed ${{ env.IMAGE }}:${{ steps.meta.outputs.tag }}"
+                echo "Pushed ${{ env.IMAGE }}:${{ steps.meta.outputs.image_tag }}"
             
             - name: Set output for deploy job
               if: always()
@@ -84,9 +85,9 @@ jobs:
             git add "${TARGET}"
 
             if git diff --staged --quiet; then
-                echo "Image không đổi — bỏ qua commit."
+                echo "Image khong doi - bo qua commit."
             else
-                git commit -m "deploy(production): ${{ env.SERVICE }} → ${IMAGE_TAG} by ${{ github.actor }}"
+                git commit -m "deploy(production): ${{ env.SERVICE }} -> ${IMAGE_TAG} by ${{ github.actor }}"
 
                 for i in 1 2 3; do
                 git push && break || (git pull --rebase && sleep $((i * 3)))
@@ -98,7 +99,7 @@ jobs:
         - name: Job Summary
           run: |
             {
-                echo "## Deploy Production — ${{ env.SERVICE }}"
+                echo "## Deploy Production - ${{ env.SERVICE }}"
                 echo "| | |"
                 echo "|---|---|"
                 echo "| Image     | \`${{ needs.build-and-push.outputs.full_image }}\` |"
