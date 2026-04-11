@@ -3,7 +3,7 @@ name: Deploy Develop
 #----------------------------------
 # sample-service: ...
 # Trigger : push to develop branch
-# Registry: ghcr.io/longpham1712578/sample-service
+# Registry: ghcr.io/long1712578/sample-service
 #
 # BUILD ARGS bakes vào image lúc build.
 #   SEVER_BUILD             -> URL backend API (vas.SERVER_BUILD_DEVELOP)
@@ -28,12 +28,12 @@ permissions:
   packages: write
 env:
     SERVICE: sample-service
-    IMAGE: ghcr.io/longpham1712578/sample-service
-    GITOPS_REPO: longpham1712578/dragon-k8s-config
+    IMAGE: ghcr.io/long1712578/sample-service
+    GITOPS_REPO: long1712578/dragon-k8s-config
     ENVIRONMENT: develop
 jobs:
     build-and-push:
-        runs-on: [self-hosted, develop]
+        runs-on: ubuntu-latest
         outputs:
             image_tag: ${{ steps.meta.outputs.image_tag }}
             full_image: ${{ steps.meta.outputs.full_image }}
@@ -74,7 +74,7 @@ jobs:
     update-k8s-manifest:
         name: Update K8s Manifest
         needs: build-and-push
-        runs-on: [self-hosted, develop]
+        runs-on: ubuntu-latest
 
         steps:
         - name: Clone k8s-config and update manifest
@@ -87,7 +87,7 @@ jobs:
             cd "${TMPDIR}"
 
             TARGET="deploy/develop/${{ env.SERVICE }}.yaml"
-            sed -i "s|image: ghcr.io/longpham1712578/${{ env.SERVICE }}:.*|image: ${NEW_IMAGE}|g" "${TARGET}"
+            sed -i "s|image: ghcr.io/long1712578/${{ env.SERVICE }}:.*|image: ${NEW_IMAGE}|g" "${TARGET}"
 
             git config user.name  "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"

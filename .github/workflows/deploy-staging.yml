@@ -17,13 +17,13 @@ permissions:
   packages: write
 env:
     SERVICE: sample-service
-    IMAGE: ghcr.io/longpham1712578/sample-service
-    GITOPS_REPO: longpham1712578/dragon-k8s-config
+    IMAGE: ghcr.io/long1712578/sample-service
+    GITOPS_REPO: long1712578/dragon-k8s-config
     ENVIRONMENT: staging
 jobs:
     build-and-push:
         name: Build and Push Image (${{github.ref_name}})
-        runs-on: [self-hosted, linux]
+        runs-on: ubuntu-latest
         outputs:
             image_tag: ${{ steps.meta.outputs.image_tag }}
             full_image: ${{ steps.meta.outputs.full_image }}
@@ -65,7 +65,7 @@ jobs:
     update-k8s-manifest:
         name: Update K8s Manifest
         needs: build-and-push
-        runs-on: [self-hosted, staging]
+        runs-on: ubuntu-latest
 
         steps:
         - name: Clone k8s-config and update manifest
@@ -78,7 +78,7 @@ jobs:
             cd "${TMPDIR}"
 
             TARGET="deploy/staging/${{ env.SERVICE }}.yaml"
-            sed -i "s|image: ghcr.io/longpham1712578/${{ env.SERVICE }}:.*|image: ${NEW_IMAGE}|g" "${TARGET}"
+            sed -i "s|image: ghcr.io/long1712578/${{ env.SERVICE }}:.*|image: ${NEW_IMAGE}|g" "${TARGET}"
 
             git config user.name  "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
