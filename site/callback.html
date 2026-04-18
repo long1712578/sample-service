@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authenticating... | Dragon SSO</title>
+    <style>
+        /*
+         * Trang callback — hiển thị spinner trong lúc exchange code → token
+         * User chỉ thấy trang này thoáng qua (<1s)
+         */
+        * { box-sizing: border-box; margin: 0; }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #e2e8f0;
+            font-family: 'Manrope', system-ui, sans-serif;
+        }
+        .card {
+            text-align: center;
+            padding: 48px;
+            border-radius: 24px;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            backdrop-filter: blur(20px);
+        }
+        .spinner {
+            width: 48px; height: 48px;
+            margin: 0 auto 24px;
+            border: 3px solid rgba(148, 163, 184, 0.2);
+            border-top-color: #f59e0b;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        h2 { font-size: 1.25rem; margin-bottom: 8px; }
+        p { color: #94a3b8; font-size: 0.9rem; }
+        .error { color: #f87171; margin-top: 16px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="spinner"></div>
+        <h2>Authenticating...</h2>
+        <p>Please wait while we verify your identity.</p>
+        <p class="error" id="callback-error"></p>
+    </div>
+
+    <!--
+        Callback flow:
+        1. SSO redirect về đây kèm ?code=xxx&state=yyy
+        2. auth.js handleCallback() exchange code → token
+        3. Lưu token và redirect về trang chính
+    -->
+    <script src="auth.js"></script>
+    <script>
+        // Chạy callback handler ngay khi page load
+        handleCallback();
+    </script>
+</body>
+</html>
