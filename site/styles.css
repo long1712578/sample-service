@@ -254,9 +254,15 @@ body {
 }
 
 /* ── 5. CV Content ────────────────────────────────────────── */
+/* ── 5. CV Content ────────────────────────────────────────── */
+body:has(.cv-content[style=""]) {
+    background: #f3f4f6 !important;
+}
+
 .cv-content {
     animation: fadeIn 0.5s ease-out;
-    padding-bottom: 60px;
+    padding: 40px 20px 80px;
+    min-height: 100vh;
 }
 
 @keyframes fadeIn {
@@ -264,182 +270,203 @@ body {
     to { opacity: 1; }
 }
 
-@font-face {
-    font-family: "LapisCV Icon";
-    font-weight: normal;
-    src: url('fonts/iconfont.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: "LapisCV Icon";
-    font-weight: bold;
-    src: url('fonts/iconfont.ttf') format('truetype');
-}
-
 .lapis-document {
     width: 210mm;
-    max-width: calc(100% - 32px);
-    margin: 40px auto 0;
-    padding: 24mm 20mm;
-    background: #fff;
-    box-shadow: 0 0 6mm 0 rgba(167, 187, 201, 0.45);
-    border-radius: var(--radius-sm);
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 30mm 20mm;
+    background: #ffffff;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
     
-    /* Lapis CV Variables */
-    --text-size: 10.5pt;
-    --line-height: 1.8;
-    --avatar-width: 28mm;
-    --h1-size: 18pt;
-    --h2-size: 13pt;
-    --h3-size: 11pt;
+    /* Elegant LapisCV Variables */
+    --color-accent: #5e84c9; /* Beautiful light blue matching Octocat ref */
+    --color-text-main: #374151;
+    --color-text-muted: #6b7280;
+    --color-heading: #1f2937;
+    --border-divider: #dae3ea;
     
-    --color-accent: #00327d;
-    --text-normal: #353a42;
-    --text-strong: #1a1a1a;
-    --h1-color: var(--text-strong);
-    --h2-color: var(--color-accent);
-    --h3-color: var(--text-strong);
-    --link-color: var(--color-accent);
-    --border-color: #dae3ea;
-    
-    color: var(--text-normal);
-    font-size: var(--text-size);
-    line-height: var(--line-height);
+    color: var(--color-text-main);
+    font-size: 14.5px;
+    line-height: 1.65;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-.lapis-document .icon {
-    font-family: "LapisCV Icon", sans-serif;
-    color: var(--color-accent);
-    font-size: 11pt;
-    margin-right: 2px;
+/* Header Area */
+.cv-header-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
 }
-
-/* Base typography for lapis-document */
-.lapis-document h1, .lapis-document h2, .lapis-document h3 {
-    font-weight: bold;
-    margin: 0;
-    line-height: 1.5;
+.cv-header-info {
+    flex: 1;
 }
-
-.lapis-document h1 {
+.cv-header-info h1 {
     font-family: 'Source Serif 4', serif;
-    font-size: var(--h1-size);
-    color: var(--h1-color);
-    text-align: center;
-    border: none;
-    letter-spacing: 1px;
+    font-size: 42px;
+    color: var(--color-heading);
+    margin: 0 0 16px 0;
+    font-weight: 700;
+    line-height: 1.1;
 }
 
-.lapis-document .cv-contact {
-    text-align: center;
-    font-size: 9.5pt;
-    color: var(--text-normal);
-    margin: 8px 0 20px;
+/* Contact Badges */
+.cv-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--color-text-main);
+    font-weight: 500;
 }
-.lapis-document .cv-contact a {
-    color: var(--link-color);
+.cv-contact div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.cv-contact svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.cv-contact a {
+    color: var(--color-text-main);
     text-decoration: none;
-    font-family: 'JetBrainsMono', monospace, sans-serif;
+    transition: color 0.15s ease;
+}
+.cv-contact a:hover {
+    color: var(--color-accent);
 }
 
-.lapis-document h2 {
-    color: var(--h2-color);
-    font-size: var(--h2-size);
-    border-bottom: 1px solid var(--border-color);
-    margin-top: 24px;
-    margin-bottom: 12px;
-    padding-bottom: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.cv-avatar {
+    margin-left: 24px;
+}
+.cv-avatar div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #eff4fa;
+    border: 2px solid #e2e8f0;
+    color: var(--color-accent);
 }
 
-.lapis-document h3 {
-    color: var(--h3-color);
-    font-size: var(--h3-size);
-    margin-top: 12px;
-    margin-bottom: 4px;
+/* Lapis Section Styling */
+.lapis-section {
+    margin-bottom: 28px;
+}
+.lapis-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    color: var(--color-accent);
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-divider);
+}
+.lapis-section-title svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
 }
 
-.lapis-document .entry {
+/* Entry Styling for Work / Edu */
+.cv-entry {
     margin-bottom: 20px;
 }
-
-.lapis-document .entry-title {
+.cv-entry-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-size: var(--h3-size);
-    margin-bottom: 2px;
+    margin-bottom: 6px;
 }
-.lapis-document .entry-title span {
-    font-size: 9.5pt;
-    color: var(--text-normal);
+.cv-entry-main {
+    flex: 1;
+    padding-right: 16px;
 }
-
-.lapis-document .entry-subtitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 8px;
+.cv-entry-title {
+    font-weight: 700;
+    color: var(--color-heading);
+    font-size: 15px;
 }
-.lapis-document .entry-subtitle strong {
+.cv-entry-company {
     font-weight: 600;
-    color: #4a5568;
-    font-size: 10pt;
+    color: var(--color-text-main);
+    font-size: 15px;
 }
-.lapis-document .entry-subtitle span {
-    font-style: italic;
-    font-size: 9.5pt;
-    color: #718096;
+.cv-entry-date {
+    font-size: 13.5px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    white-space: nowrap;
 }
 
+.cv-entry-desc {
+    margin: 0 0 8px 0;
+    color: var(--color-text-main);
+    text-align: justify;
+}
+
+/* Lists and Bullets */
 .lapis-document ul {
-    list-style-type: '\2022';
+    list-style-type: none;
     padding-left: 20px;
-    margin: 6px 0;
+    margin: 0;
 }
 .lapis-document li {
-    margin-bottom: 4px;
-    padding-left: 4px;
+    position: relative;
+    margin-bottom: 6px;
+    color: var(--color-text-main);
+    text-align: justify;
 }
-.lapis-document strong {
-    color: var(--text-strong);
-    font-weight: bold;
+.lapis-document li::before {
+    content: "•";
+    position: absolute;
+    left: -14px;
+    color: var(--color-text-main); /* Match text */
+    font-size: 14px;
 }
-
+.lapis-document li strong {
+    color: var(--color-heading);
+    font-weight: 600;
+}
 .lapis-document p {
-    margin: 8px 0;
     text-align: justify;
 }
 
 /* ── 6. Responsive ────────────────────────────────────────── */
 @media (max-width: 900px) {
-    .login-card {
-        padding: 32px 24px;
-    }
-
-    .user-bar {
-        padding: 10px 16px;
-    }
-
-    .lapis-document {
-        padding: 16mm 12mm;
-    }
+    .login-card {     padding: 32px 24px; }
+    .user-bar {       padding: 10px 16px; }
+    .cv-content {     padding: 20px 10px 40px; }
+    .lapis-document { padding: 20mm 15mm; }
 }
 
 @media (max-width: 600px) {
-    .lapis-document .entry-title {
+    .cv-header-layout {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .cv-avatar { margin-left: 0; }
+    .cv-entry-header {
         flex-direction: column;
+        align-items: flex-start;
     }
-    .lapis-document .entry-subtitle {
-        flex-direction: column;
-        margin-bottom: 12px;
-    }
-    .lapis-document .cv-contact span.icon {
-        display: none;
-    }
-    .lapis-document .cv-contact {
-        line-height: 1.8;
+    .cv-entry-date {
+        margin-top: 4px;
     }
 }
 
