@@ -256,6 +256,7 @@ body {
 /* ── 5. CV Content ────────────────────────────────────────── */
 .cv-content {
     animation: fadeIn 0.5s ease-out;
+    padding-bottom: 60px;
 }
 
 @keyframes fadeIn {
@@ -263,207 +264,156 @@ body {
     to { opacity: 1; }
 }
 
-.page-shell {
-    width: min(1120px, calc(100% - 32px));
-    margin: 0 auto;
-    padding: 48px 0 72px;
+@font-face {
+    font-family: "LapisCV Icon";
+    font-weight: normal;
+    src: url('fonts/iconfont.ttf') format('truetype');
 }
 
-.hero {
-    position: relative;
-    overflow: hidden;
-    padding: 40px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-xl);
-    background: linear-gradient(135deg, rgba(255, 248, 240, 0.96), rgba(255, 255, 255, 0.72));
-    box-shadow: var(--shadow);
+@font-face {
+    font-family: "LapisCV Icon";
+    font-weight: bold;
+    src: url('fonts/iconfont.ttf') format('truetype');
 }
 
-.eyebrow {
-    margin: 0 0 12px;
-    color: var(--accent);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    font-weight: 800;
+.lapis-document {
+    width: 210mm;
+    max-width: calc(100% - 32px);
+    margin: 40px auto 0;
+    padding: 24mm 20mm;
+    background: #fff;
+    box-shadow: 0 0 6mm 0 rgba(167, 187, 201, 0.45);
+    border-radius: var(--radius-sm);
+    
+    /* Lapis CV Variables */
+    --text-size: 10.5pt;
+    --line-height: 1.8;
+    --avatar-width: 28mm;
+    --h1-size: 18pt;
+    --h2-size: 13pt;
+    --h3-size: 11pt;
+    
+    --color-accent: #00327d;
+    --text-normal: #353a42;
+    --text-strong: #1a1a1a;
+    --h1-color: var(--text-strong);
+    --h2-color: var(--color-accent);
+    --h3-color: var(--text-strong);
+    --link-color: var(--color-accent);
+    --border-color: #dae3ea;
+    
+    color: var(--text-normal);
+    font-size: var(--text-size);
+    line-height: var(--line-height);
 }
 
-h1, h2, h3 { margin: 0; }
+.lapis-document .icon {
+    font-family: "LapisCV Icon", sans-serif;
+    color: var(--color-accent);
+    font-size: 11pt;
+    margin-right: 2px;
+}
 
-h1 {
-    max-width: 680px;
+/* Base typography for lapis-document */
+.lapis-document h1, .lapis-document h2, .lapis-document h3 {
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.lapis-document h1 {
     font-family: 'Source Serif 4', serif;
-    font-size: clamp(2.8rem, 7vw, 5rem);
-    line-height: 0.95;
+    font-size: var(--h1-size);
+    color: var(--h1-color);
+    text-align: center;
+    border: none;
+    letter-spacing: 1px;
 }
 
-.summary {
-    max-width: 760px;
-    margin: 18px 0 0;
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: var(--muted);
+.lapis-document .cv-contact {
+    text-align: center;
+    font-size: 9.5pt;
+    color: var(--text-normal);
+    margin: 8px 0 20px;
 }
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 12px;
-    margin-top: 28px;
-}
-
-.contact-grid a,
-.contact-grid span {
-    padding: 14px 16px;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(180, 83, 9, 0.14);
-    color: var(--text);
+.lapis-document .cv-contact a {
+    color: var(--link-color);
     text-decoration: none;
-    font-weight: 600;
-    transition: all var(--transition);
+    font-family: 'JetBrainsMono', monospace, sans-serif;
 }
 
-.contact-grid a:hover {
-    border-color: var(--accent-soft);
-    background: rgba(245, 158, 11, 0.08);
-    transform: translateY(-2px);
-}
-
-.layout {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 20px;
+.lapis-document h2 {
+    color: var(--h2-color);
+    font-size: var(--h2-size);
+    border-bottom: 1px solid var(--border-color);
     margin-top: 24px;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.panel {
-    padding: 28px;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--line);
-    background: var(--panel);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(10px);
-    transition: transform var(--transition);
-}
-
-.panel:hover {
-    transform: translateY(-2px);
-}
-
-.panel h2 {
-    margin-bottom: 14px;
-    font-size: 1.25rem;
-}
-
-.panel p {
-    margin: 0;
-    color: var(--muted);
-    line-height: 1.75;
-}
-
-.panel p + p {
+.lapis-document h3 {
+    color: var(--h3-color);
+    font-size: var(--h3-size);
     margin-top: 12px;
+    margin-bottom: 4px;
 }
 
-.panel-accent {
-    grid-column: span 5;
-    background: linear-gradient(180deg, rgba(180, 83, 9, 0.95), rgba(120, 53, 15, 0.92));
-    color: #fff7ed;
+.lapis-document .entry {
+    margin-bottom: 20px;
 }
 
-.panel-accent p,
-.panel-accent h2 {
-    color: inherit;
-}
-
-.skills-panel {
-    grid-column: span 7;
-}
-
-.skill-groups {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
-}
-
-.skill-groups div {
-    padding: 18px;
-    border-radius: var(--radius-md);
-    background: rgba(24, 33, 46, 0.03);
-    border: 1px solid rgba(24, 33, 46, 0.06);
-    transition: all var(--transition);
-}
-
-.skill-groups div:hover {
-    background: rgba(245, 158, 11, 0.05);
-    border-color: rgba(245, 158, 11, 0.15);
-}
-
-.skill-groups h3 {
-    margin-bottom: 8px;
-    font-size: 1rem;
-}
-
-.timeline-panel {
-    grid-column: span 8;
-}
-
-.timeline-item + .timeline-item {
-    margin-top: 22px;
-    padding-top: 22px;
-    border-top: 1px solid var(--line);
-}
-
-.timeline-head {
+.lapis-document .entry-title {
     display: flex;
-    align-items: flex-start;
     justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 10px;
+    align-items: baseline;
+    font-size: var(--h3-size);
+    margin-bottom: 2px;
+}
+.lapis-document .entry-title span {
+    font-size: 9.5pt;
+    color: var(--text-normal);
 }
 
-.timeline-head p,
-.timeline-head span {
-    margin: 6px 0 0;
-    color: var(--muted);
+.lapis-document .entry-subtitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
+.lapis-document .entry-subtitle strong {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 10pt;
+}
+.lapis-document .entry-subtitle span {
+    font-style: italic;
+    font-size: 9.5pt;
+    color: #718096;
 }
 
-ul {
-    margin: 0;
-    padding-left: 18px;
-    color: var(--muted);
-    line-height: 1.7;
+.lapis-document ul {
+    list-style-type: '\2022';
+    padding-left: 20px;
+    margin: 6px 0;
+}
+.lapis-document li {
+    margin-bottom: 4px;
+    padding-left: 4px;
+}
+.lapis-document strong {
+    color: var(--text-strong);
+    font-weight: bold;
 }
 
-.quote-panel {
-    grid-column: span 4;
-    background: linear-gradient(180deg, rgba(31, 41, 55, 0.96), rgba(55, 65, 81, 0.94));
-}
-
-.quote-panel h2,
-.quote-panel p {
-    color: #f9fafb;
+.lapis-document p {
+    margin: 8px 0;
+    text-align: justify;
 }
 
 /* ── 6. Responsive ────────────────────────────────────────── */
 @media (max-width: 900px) {
-    .panel-accent,
-    .skills-panel,
-    .timeline-panel,
-    .quote-panel {
-        grid-column: 1 / -1;
-    }
-
-    .hero,
-    .panel {
-        padding: 24px;
-    }
-
-    .timeline-head {
-        flex-direction: column;
-    }
-
     .login-card {
         padding: 32px 24px;
     }
@@ -471,14 +421,25 @@ ul {
     .user-bar {
         padding: 10px 16px;
     }
-}
 
-@media (max-width: 480px) {
-    .page-shell {
-        padding: 24px 0 48px;
-    }
-
-    .contact-grid {
-        grid-template-columns: 1fr;
+    .lapis-document {
+        padding: 16mm 12mm;
     }
 }
+
+@media (max-width: 600px) {
+    .lapis-document .entry-title {
+        flex-direction: column;
+    }
+    .lapis-document .entry-subtitle {
+        flex-direction: column;
+        margin-bottom: 12px;
+    }
+    .lapis-document .cv-contact span.icon {
+        display: none;
+    }
+    .lapis-document .cv-contact {
+        line-height: 1.8;
+    }
+}
+

@@ -73,115 +73,232 @@
          CV CONTENT — Chỉ hiển thị sau khi login thành công
          ════════════════════════════════════════════════════════════ -->
     <div id="cv-content" class="cv-content" style="display: none;">
-        <div class="page-shell">
-            <header class="hero">
-                <p class="eyebrow">Senior .NET Back-end Engineer</p>
-                <h1>Pham Dinh Long</h1>
-                <p class="summary">
-                    5+ years building and modernizing enterprise platforms across ERP, HRM, procurement, and real-time messaging.
-                    Strong in ABP Framework, distributed systems, DDD, CQRS, Kafka, and Kubernetes-oriented delivery.
-                </p>
-                <div class="contact-grid">
-                    <a href="tel:0336183242">0336 183 242</a>
-                    <a href="mailto:pdlong578@gmail.com">pdlong578@gmail.com</a>
-                    <a href="https://github.com/long1712578" target="_blank" rel="noreferrer">GitHub</a>
-                    <a href="https://www.linkedin.com/in/long-pham-509264329" target="_blank" rel="noreferrer">LinkedIn</a>
-                    <span>Ho Chi Minh City</span>
+        <div class="lapis-document">
+            
+            <h1 style="text-align: center; border: none;">PHAM DINH LONG</h1>
+            
+            <p class="cv-contact">
+                <span class="icon">&#xe638;</span> HO CHI MINH CITY
+                | <span class="icon">&#xe603;</span> <a href="tel:0336183242">0336 183 242</a>
+                | <span class="icon">&#xe635;</span> <a href="mailto:pdlong578@gmail.com">pdlong578@gmail.com</a>
+                | <span class="icon">&#xe673;</span> <a href="https://github.com/long1712578" target="_blank">github.com/long1712578</a>
+                | <span class="icon">&#xe8b5;</span> <a href="https://www.linkedin.com/in/long-pham-509264329" target="_blank">linkedin.com/in/long-pham</a>
+            </p>
+
+            <h2>PROFESSIONAL SUMMARY</h2>
+            <p>Senior .NET Back-end Engineer with 5+ years of experience designing and modernizing enterprise systems in ERP, HRM, procurement, and real-time messaging domains. Strong expertise in distributed systems, event-driven architecture (Kafka), DDD, CQRS, and modular monolith design using ABP Framework. Proven experience in system modernization, high-throughput data processing optimization, and building scalable back-end services deployed on Kubernetes environments.</p>
+
+            <h2>TECHNICAL SKILLS</h2>
+            <ul>
+                <li><strong>Technologies:</strong> .NET 6/8/9, ASP.NET Core, Angular, NodeJS, NestJS.</li>
+                <li><strong>Data system:</strong> SQL Server, Redis, Elasticsearch, PostgreSQL.</li>
+                <li><strong>Software Architect:</strong> Modular Monolithic, Microservice, Domain-Driven Design (DDD), SOLID Principle, OOP, Design Pattern.</li>
+                <li><strong>Other:</strong> Socket.IO, Kafka, Firebase FCM, EPPlus, Tailwind CSS.</li>
+            </ul>
+
+            <h2>WORK EXPERIENCES</h2>
+
+            <div class="entry">
+                <div class="entry-title">
+                    <h3>SEVATECH</h3>
+                    <span>HCM, Vietnam</span>
                 </div>
-            </header>
-
-            <main class="layout">
-                <section class="panel panel-accent">
-                    <h2>Professional Summary</h2>
-                    <p>
-                        Senior .NET Back-end Engineer experienced in designing scalable business platforms, refactoring legacy systems,
-                        and leading modernization efforts from monolithic or desktop systems into modular web architectures.
-                    </p>
-                    <p>
-                        Delivery focus includes payroll, procurement, ERP domains, event-driven integrations, background processing,
-                        and production-oriented deployment workflows.
-                    </p>
-                </section>
-
-                <section class="panel skills-panel">
-                    <h2>Technical Skills</h2>
-                    <div class="skill-groups">
-                        <div>
-                            <h3>Platform</h3>
-                            <p>.NET 6/8/9, ASP.NET Core, ABP Framework, Angular, Node.js, NestJS</p>
-                        </div>
-                        <div>
-                            <h3>Data</h3>
-                            <p>SQL Server, PostgreSQL, Redis, Elasticsearch</p>
-                        </div>
-                        <div>
-                            <h3>Architecture</h3>
-                            <p>Modular Monolith, Microservices, DDD, CQRS, SOLID, OOP, Design Patterns</p>
-                        </div>
-                        <div>
-                            <h3>DevOps</h3>
-                            <p>Docker, Kubernetes (K3s), GitHub Actions, Cloudflare, Kafka, Socket.IO</p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="panel timeline-panel">
-                    <h2>Selected Experience</h2>
-
-                    <article class="timeline-item">
-                        <div class="timeline-head">
-                            <div>
-                                <h3>Sevatech</h3>
-                                <p>HRM System Modernization</p>
-                            </div>
-                            <span>May 2025 - Present</span>
-                        </div>
+                <div class="entry-subtitle">
+                    <strong>HRM System Modernization</strong>
+                    <span>May.2025 - Present</span>
+                </div>
+                <ul>
+                    <li><strong>Description:</strong> Led the modernization of the legacy WinForms HRM system into a scalable web platform using ABP Framework (.NET 9)</li>
+                    <li><strong>Team size:</strong> 6</li>
+                    <li><strong>Responsibilities:</strong>
                         <ul>
-                            <li>Led migration from WinForms to ABP Framework on .NET 9 with modular architecture redesign.</li>
-                            <li>Migrated data platform from SQL Server to PostgreSQL with schema redesign and query optimization.</li>
-                            <li>Applied Kafka, Redis, Elasticsearch, background workers, and scheduled jobs for payroll batch processing.</li>
+                            <li>Led the migration form WinForms to web architecture, redesigning domain model using ABP modular architecture.</li>
+                            <li>Migrated databased from SQL Server to PostgreSQL, including schema redesign, query optimization.</li>
+                            <li>Refactored legacy stored procedures into Linq-based domain logic following DDD principles.</li>
+                            <li>Re-engineered payroll and attendance bussiness rules to match current company policies.</li>
+                            <li>Designed and implemented dynamic payroll formula engine, allowing runtime configuration of salary calculations without redeployed.</li>
+                            <li>Applied distributed system patterns: Kafka, Elasticsearch, Redis, Background workers and scheduled jobs for payroll batch processing.</li>
                         </ul>
-                    </article>
-
-                    <article class="timeline-item">
-                        <div class="timeline-head">
-                            <div>
-                                <h3>Sevatech</h3>
-                                <p>Purchase Order System</p>
-                            </div>
-                            <span>May 2025 - Present</span>
-                        </div>
+                    </li>
+                    <li><strong>Technology:</strong>
                         <ul>
-                            <li>Designed procurement lifecycle system for vendor selection, approvals, and order management.</li>
-                            <li>Led domain modeling with ABP layered architecture and multi-stage workflow orchestration.</li>
-                            <li>Owned technical planning and code review as team lead.</li>
+                            <li>Backend: ABP Framework (.NET 9), Redis, Kafka, Elasticsearch, Database: SQL server, Postgres.</li>
+                            <li>Frontend: Reactjs.</li>
+                            <li>Deployment: Gitlab, Jenskins, Docker.</li>
                         </ul>
-                    </article>
+                    </li>
+                </ul>
+            </div>
 
-                    <article class="timeline-item">
-                        <div class="timeline-head">
-                            <div>
-                                <h3>Enterprise ERP System</h3>
-                                <p>Web platform for finance, procurement, warehouse, production planning, and client management</p>
-                            </div>
-                            <span>2023 - 2025</span>
-                        </div>
+            <div class="entry">
+                <div class="entry-title">
+                    <h3>SEVATECH</h3>
+                    <span>HCM, Vietnam</span>
+                </div>
+                <div class="entry-subtitle">
+                    <strong>Purchase Order System</strong>
+                    <span>May.2025 - Present</span>
+                </div>
+                <ul>
+                    <li><strong>Description:</strong> Designed and led development of a procurement lifecycle system covering vendor selection, multi-stage approvals, and order management.</li>
+                    <li><strong>Team size:</strong> 7</li>
+                    <li><strong>Role:</strong> Team lead</li>
+                    <li><strong>Responsibilities:</strong>
                         <ul>
-                            <li>Built business flows for order lifecycle, merchandise management, and warehouse automation.</li>
-                            <li>Delivered real-time updates using background workers and Socket.IO patterns.</li>
-                            <li>Supported costing, pricing, and production process orchestration for enterprise operations.</li>
+                            <li>Architected and implemented procurement domain model using ABP layered architecture.</li>
+                            <li>Designed workflow orchestration for multi-stage approval processes.</li>
+                            <li>Led technical planning and code review for the development team.</li>
                         </ul>
-                    </article>
-                </section>
+                    </li>
+                    <li><strong>Technology:</strong>
+                        <ul>
+                            <li>Backend: ABP Framework, Redis, PostgreSQL.</li>
+                            <li>Deployment: Gitlab, docker, Jenskins.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
 
-                <section class="panel quote-panel">
-                    <h2>What I Bring</h2>
-                    <p>
-                        I combine backend architecture depth with practical delivery discipline: clean domain design, production-safe CI/CD,
-                        and systems that can be debugged, scaled, and handed over without drama.
-                    </p>
-                </section>
-            </main>
+            <div class="entry">
+                <div class="entry-title">
+                    <h3>UN-AVAILABLE LTD</h3>
+                    <span>HCM, Vietnam</span>
+                </div>
+                <div class="entry-subtitle">
+                    <strong>Enterprise ERP System (Web)</strong>
+                    <span>July 2023 - 2025</span>
+                </div>
+                <ul>
+                    <li><strong>Description:</strong> A Comprehensive ERP system designed to integrate core enterprise operations including finance, commercial, purchasing, warehouse, production planning, client management.</li>
+                    <li><strong>Business Scope and Features:</strong>
+                        <ul>
+                            <li>Client Management: Enables customers to create and modify orders, upload techpack files and change requests; Tracks order status, handles rejection flows and supports real-time order updates using Hangfire, Background Workers and Socket.IO.</li>
+                            <li>Merchandise Management: Defines fabric, trims and treatment, CMP, POM for each product; Calculates costing and pricing for financial forecasting; Generates cutting dockets, manages cutting processes and print files for production.</li>
+                            <li>Warehouse Management: Automates stock-in and stock-out processing using SQL triggers and stored procedures; Support barcode and QR code generation for inventory tracking and verification.</li>
+                            <li>Finance Management: Handles costing sheet approval and financial report; Generates Excel and PDF documents using Epplus for easy export, review, and audit purposes.</li>
+                            <li>Planning Management: Uses background workers and socket.io to generate dashboards for better decision making.</li>
+                            <li>Purchase Management: Supports procurement life-cycle including vendor selection, item allocation, order processing, and delivery tracking.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Team size:</strong> 7</li>
+                    <li><strong>Responsibilities:</strong>
+                        <ul>
+                            <li>Maintained and extended the Costing Sheet Module, including formula updates, flow logic adjustments, and data synchronization enhancements.</li>
+                            <li>Collaborated on major production features: Cutting Docket, Fabric, Trim, Treatment, CMP serving as the foundation for complete order creation.</li>
+                            <li>Implement real-time production dashboards using Socket.IO, background workers.</li>
+                            <li>Designed planning workflows that collect data and provide factory-level process analytic.</li>
+                            <li>Developed client-side features including order creation, tech-back uploads, change requests, cost sheet updates.</li>
+                            <li>Applied advanced design pattern: Strategy, Provider, Builder to make business logic easily extendable. Integrated Observer Pattern to enable dynamic generation of cutting docket print files.</li>
+                            <li>Supported Warehouse module with barcode/QR code generation, and automated stock-in/out via SQL stored procedures.</li>
+                            <li>Implemented Finance module with excel/pdf export features using Epplus.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Technology:</strong>
+                        <ul>
+                            <li>Backend: ASP.NET, Entity Framework, SQL Server, Hangfire, Socket.IO, Epplus.</li>
+                            <li>Frontend: Webform, JavaScript.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-title">
+                    <h3>UN-AVAILABLE LTD</h3>
+                    <span>HCM, Vietnam</span>
+                </div>
+                <div class="entry-subtitle">
+                    <strong>Enterprise ERP System (Mobile)</strong>
+                    <span>July 2024 - 2025</span>
+                </div>
+                <ul>
+                    <li><strong>Description:</strong> A mobile-oriented API project built as part of the larger ERP system, focusing on warehouse operations such as managing lots, pallets and locations.</li>
+                    <li><strong>Team size:</strong> 3</li>
+                    <li><strong>Responsibilities:</strong>
+                        <ul>
+                            <li>Developed RESTFul APIs create and update data to lots, pallets, locations of warehouses.</li>
+                            <li>Maintained and optimized SQL queries to improve data retrieval performance.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Technology:</strong>
+                        <ul>
+                            <li>.NET 8, CQRS pattern, MediatR, SQL Server, Redis.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-title">
+                    <h3>TRUONG MINH THINH COMPANY</h3>
+                    <span>HCM, Vietnam</span>
+                </div>
+                <div class="entry-subtitle">
+                    <strong>TDesk</strong>
+                    <span>Nov.2020 - July 2023</span>
+                </div>
+                <ul>
+                    <li><strong>Description:</strong> An all-in-one conversational platform that connects customers and businesses effectively, allows users to chat with each other, can be integrated with other omni-channel platforms.</li>
+                    <li><strong>Team size:</strong> 7</li>
+                    <li><strong>Responsibilities:</strong>
+                        <ul>
+                            <li>Exploring, implementing, and deploying backend services using Node.js and .NET to handle real-time messaging, generate distributed Id (snowflake).</li>
+                            <li>Optimize load time and runtime performance of web UI and develop reusable plugin with Angular Elements.</li>
+                            <li>Design database schema for system and using Cassandra to optimate heavy write messaging.</li>
+                            <li>Integrated Firebase FCM to Angular and .NET to create push notification.</li>
+                            <li>Conducting thorough testing and debugging to ensure a stable and reliable system.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Technology:</strong>
+                        <ul>
+                            <li>Backend: ABP Framework (.NET 6), NestJs, Socket IO, Redis, Seq, Kafka, Elasticsearch, SQL server, Cassandra.</li>
+                            <li>Frontend: Angular 13, Firebase FCM, Angular Element, Tailwind CSS.</li>
+                            <li>Deployment: Azure Pipeline, Helm Chart, K8s, Docker.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-title">
+                    <h3>TRUONG MINH THINH COMPANY</h3>
+                    <span>HCM, Vietnam</span>
+                </div>
+                <div class="entry-subtitle">
+                    <strong>LiveApp</strong>
+                    <span>July 2022 - July 2023</span>
+                </div>
+                <ul>
+                    <li><strong>Description:</strong> LiveApp is a livestream platform that empowers sellers and shops to effortlessly display and directly sell their products to customers.</li>
+                    <li><strong>Team size:</strong> 10</li>
+                    <li><strong>Responsibilities:</strong>
+                        <ul>
+                            <li>Implement the big features of the current project: video view count, comment, post.</li>
+                            <li>Write pipeline for CI/CD and manage services in K8s.</li>
+                            <li>Integrated chat service from TDesk to LiveApp, create order and confirm order.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Technology:</strong>
+                        <ul>
+                            <li>Backend: ABP Framework, SQL server, Redis, Kafka, Firebase FCM, SocketIO, IdentityServer4.</li>
+                            <li>Deployment: Azure Pipeline, Helm Chart, K8s, Docker.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <h2>EDUCATION</h2>
+            <div class="entry">
+                <div class="entry-title">
+                    <h3>Bachelor's Degree in Information Technology</h3>
+                    <span>HCM, Vietnam</span>
+                </div>
+                <div class="entry-subtitle">
+                    <strong>VNUHCM - University of Science (HCMUS)</strong>
+                    <span>GPA: 7.7/10</span>
+                </div>
+            </div>
+
         </div>
     </div>
 
