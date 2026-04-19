@@ -5,46 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pham Dinh Long | Software Engineer</title>
     <meta name="description" content="Senior .NET Back-end Engineer with experience in enterprise systems, ABP Framework, distributed systems, and Kubernetes delivery.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <!-- ════════════════════════════════════════════════════════════
          LOGIN GATE — Hiển thị khi chưa đăng nhập
-         User phải login qua SSO mới xem được CV
          ════════════════════════════════════════════════════════════ -->
     <div id="login-gate" class="login-gate">
-        <div class="login-particles">
-            <span></span><span></span><span></span>
-            <span></span><span></span><span></span>
-        </div>
         <div class="login-card">
-            <div class="login-logo">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                    <rect width="48" height="48" rx="14" fill="url(#grad)"/>
-                    <path d="M14 24l6 6 14-14" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    <defs><linearGradient id="grad" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#b45309"/></linearGradient></defs>
-                </svg>
+            <h2 class="login-title">Long Pham CV Portal</h2>
+            <p class="login-subtitle">Please sign in to view the portfolio.</p>
+            
+            <div class="login-hint">
+                <p style="margin-bottom: 8px; font-weight: 600;">Demo Credentials:</p>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div>Username: <code>admin</code></div>
+                    <div>Password: <code>1q2w3E*</code></div>
+                </div>
             </div>
-            <h2 class="login-title">Dragon CV Portal</h2>
-            <p class="login-subtitle">Sign in with your Dragon SSO account to view the portfolio.</p>
+
             <p class="login-error" id="login-error"></p>
+            
             <button class="login-btn" onclick="login()" id="login-button">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                    <polyline points="10 17 15 12 10 7"/>
-                    <line x1="15" y1="12" x2="3" y2="12"/>
-                </svg>
                 Sign in with SSO
             </button>
-            <div class="login-footer">
-                <span>Protected by Dragon SSO</span>
-                <span>•</span>
-                <span>OpenID Connect</span>
-            </div>
         </div>
     </div>
 
@@ -53,18 +38,13 @@
          ════════════════════════════════════════════════════════════ -->
     <div id="user-bar" class="user-bar" style="display: none;">
         <div class="user-info">
-            <div class="user-avatar" id="user-avatar">U</div>
+            <div class="user-avatar" id="user-avatar">L</div>
             <div>
                 <div class="user-name" id="user-name">User</div>
                 <div class="user-email" id="user-email"></div>
             </div>
         </div>
         <button class="logout-btn" onclick="logout()" id="logout-button">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                <polyline points="16 17 21 12 16 7"/>
-                <line x1="21" y1="12" x2="9" y2="12"/>
-            </svg>
             Sign out
         </button>
     </div>
@@ -73,173 +53,171 @@
          CV CONTENT — Chỉ hiển thị sau khi login thành công
          ════════════════════════════════════════════════════════════ -->
     <div id="cv-content" class="cv-content" style="display: none;">
-        <div class="lapis-document">
-            
+        <div class="cv-document">
+
             <!-- HEADER -->
-            <div class="cv-header-layout">
+            <div class="cv-header">
+                <div class="cv-header-photo-placeholder">
+                   <!-- <img src="avatar.jpg" class="cv-header-photo" alt="avatar"> -->
+                </div>
                 <div class="cv-header-info">
                     <h1>Pham Dinh Long</h1>
-                    <div class="cv-contact">
-                        <div>
-                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            Ho Chi Minh City
-                        </div>
-                        <div>
-                            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                            <a href="tel:0336183242">0336 183 242</a>
-                        </div>
-                        <div>
-                            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            <a href="mailto:pdlong578@gmail.com">pdlong578@gmail.com</a>
-                        </div>
-                        <div>
-                            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                            <a href="https://github.com/long1712578" target="_blank">long1712578</a>
-                        </div>
-                        <div>
-                            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                            <a href="https://www.linkedin.com/in/long-pham-509264329" target="_blank">long-pham</a>
-                        </div>
+                    <h2>Senior .NET Back-end Engineer</h2>
+                    <div class="cv-header-details">
+                        <div><span class="label">Dob:</span><span class="val">17/12/1998</span></div>
+                        <div><span class="label">Gender:</span><span class="val">Male</span></div>
+                        <div><span class="label">Phone:</span><span class="val">0336 183 242</span></div>
+                        <div><span class="label">Email:</span><span class="val"><a href="mailto:pdlong578@gmail.com">pdlong578@gmail.com</a></span></div>
+                        <div><span class="label">Website:</span><span class="val"><a href="https://github.com/long1712578" target="_blank">github.com/long1712578</a> | <a href="https://linkedin.com/in/long-pham-509264329" target="_blank">linkedin.com/in/long-pham</a></span></div>
+                        <div><span class="label">Address:</span><span class="val">Ho Chi Minh City, Vietnam</span></div>
                     </div>
-                </div>
-                <div class="cv-avatar">
-                   <!-- Placeholder avatar, can be replaced via img tag later -->
                 </div>
             </div>
 
-            <!-- SUMMARY -->
-            <div class="lapis-section">
-                <h2 class="lapis-section-title">
-                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    Professional Summary
-                </h2>
+            <!-- OBJECTIVE -->
+            <div class="cv-section">
+                <div class="cv-section-title">Professional Summary</div>
                 <p>Senior .NET Back-end Engineer with 5+ years of experience designing and modernizing enterprise systems in ERP, HRM, procurement, and real-time messaging domains. Strong expertise in distributed systems, event-driven architecture (Kafka), DDD, CQRS, and modular monolith design using ABP Framework. Proven experience in system modernization, high-throughput data processing optimization, and building scalable back-end services deployed on Kubernetes environments.</p>
             </div>
 
-            <!-- SKILLS -->
-            <div class="lapis-section">
-                <h2 class="lapis-section-title">
-                    <svg viewBox="0 0 24 24"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                    Technical Skills
-                </h2>
-                <ul>
-                    <li><strong>Technologies:</strong> .NET 6/8/9, ASP.NET Core, Angular, NodeJS, NestJS</li>
-                    <li><strong>Data system:</strong> SQL Server, PostgreSQL, Redis, Elasticsearch</li>
-                    <li><strong>Architecture:</strong> Modular Monolith, Microservices, Domain-Driven Design (DDD), CQRS, SOLID, OOP</li>
-                    <li><strong>Other:</strong> Kubernetes (K3s), Docker, Kafka, Socket.IO, Firebase FCM, EPPlus, Tailwind CSS</li>
-                </ul>
-            </div>
-
-            <!-- WORK EXPERIENCES -->
-            <div class="lapis-section">
-                <h2 class="lapis-section-title">
-                    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                    Work Experience
-                </h2>
-
-                <div class="cv-entry">
-                    <div class="cv-entry-header">
-                        <div class="cv-entry-main"><span class="cv-entry-title">Back-end Engineer</span> - <span class="cv-entry-company">Sevatech, HCM</span></div>
-                        <div class="cv-entry-date">May 2025 - Present</div>
+            <!-- WORK EXPERIENCE -->
+            <div class="cv-section">
+                <div class="cv-section-title">Work Experience</div>
+                
+                <div class="cv-row">
+                    <div class="cv-row-left">05/2025 - Present</div>
+                    <div class="cv-row-right">
+                        <div class="cv-item-title">Sevatech</div>
+                        <div class="cv-item-subtitle">Back-end Engineer (System Modernization)</div>
+                        <ul>
+                            <li>Led the modernization of the legacy WinForms HRM system into a scalable web platform using ABP Framework (.NET 9).</li>
+                            <li>Redesigned domain model using ABP modular architecture and refactored legacy stored procedures into Linq-based domain logic following DDD principles.</li>
+                            <li>Migrated database from SQL Server to PostgreSQL, including schema redesign and query optimization.</li>
+                            <li>Designed and implemented dynamic payroll formula engine, allowing runtime configuration of salary calculations without redeployment.</li>
+                            <li>Applied distributed system patterns using Kafka, Elasticsearch, Redis, and background workers for payroll batch processing.</li>
+                        </ul>
                     </div>
-                    <p class="cv-entry-desc">Led the modernization of the legacy WinForms HRM system into a scalable web platform using ABP Framework (.NET 9).</p>
-                    <ul>
-                        <li>Redesigned domain model using ABP modular architecture and refactored legacy stored procedures into Linq-based domain logic following DDD principles.</li>
-                        <li>Migrated database from SQL Server to PostgreSQL, including schema redesign and query optimization.</li>
-                        <li>Designed and implemented dynamic payroll formula engine, allowing runtime configuration of salary calculations without redeployment.</li>
-                        <li>Applied distributed system patterns using Kafka, Elasticsearch, Redis, background workers and scheduled jobs for payroll batch processing.</li>
-                    </ul>
+                </div>
+                
+                <div class="cv-row">
+                    <div class="cv-row-left">05/2025 - Present</div>
+                    <div class="cv-row-right">
+                        <div class="cv-item-title">Sevatech</div>
+                        <div class="cv-item-subtitle">Team Lead (Purchase Order System)</div>
+                        <ul>
+                            <li>Architected and implemented procurement domain model using ABP layered architecture.</li>
+                            <li>Designed workflow orchestration for multi-stage approval processes.</li>
+                            <li>Led technical planning and code review for the development team of 7 members.</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="cv-entry">
-                    <div class="cv-entry-header">
-                        <div class="cv-entry-main"><span class="cv-entry-title">Team Lead</span> - <span class="cv-entry-company">Sevatech, HCM</span></div>
-                        <div class="cv-entry-date">May 2025 - Present</div>
+                <div class="cv-row">
+                    <div class="cv-row-left">07/2023 - 05/2025</div>
+                    <div class="cv-row-right">
+                        <div class="cv-item-title">Un-Available LTD</div>
+                        <div class="cv-item-subtitle">Back-end Engineer (Enterprise ERP System)</div>
+                        <ul>
+                            <li>Developed real-time order tracking and updates using Hangfire, Background Workers, and Socket.IO.</li>
+                            <li>Applied advanced design patterns (Strategy, Provider, Builder) to make business logic easily extendable for change requests and integrated the Observer Pattern to enable dynamic generation of cutting docket print files.</li>
+                            <li>Maintained and extended the Costing Sheet Module, including formula updates, flow logic adjustments, and data synchronization.</li>
+                            <li>Supported Warehouse module with barcode/QR code generation, and automated stock-in/out via SQL stored procedures.</li>
+                            <li>Implemented Finance module with automated Excel/PDF export features using Epplus.</li>
+                        </ul>
                     </div>
-                    <p class="cv-entry-desc">Designed and led development of a procurement lifecycle system covering vendor selection, multi-stage approvals, and order management.</p>
-                    <ul>
-                        <li>Architected and implemented procurement domain model using ABP layered architecture.</li>
-                        <li>Designed workflow orchestration for multi-stage approval processes.</li>
-                        <li>Led technical planning and code review for the development team of 7 members.</li>
-                    </ul>
                 </div>
 
-                <div class="cv-entry">
-                    <div class="cv-entry-header">
-                        <div class="cv-entry-main"><span class="cv-entry-title">Back-end Engineer</span> - <span class="cv-entry-company">Un-Available LTD, HCM</span></div>
-                        <div class="cv-entry-date">July 2023 - 2025</div>
+                <div class="cv-row">
+                    <div class="cv-row-left">07/2024 - 05/2025</div>
+                    <div class="cv-row-right">
+                        <div class="cv-item-title">Un-Available LTD</div>
+                        <div class="cv-item-subtitle">Back-end API Developer (ERP Mobile)</div>
+                        <ul>
+                            <li>Developed RESTFul APIs to manage data for lots, pallets, and warehouse locations using .NET 8, CQRS pattern, and MediatR.</li>
+                            <li>Maintained and optimized SQL queries and Redis caching to improve data retrieval performance for mobile clients.</li>
+                        </ul>
                     </div>
-                    <p class="cv-entry-desc">Developed a comprehensive ERP web system designed to integrate core enterprise operations including finance, commercial, purchasing, warehouse, production planning, and client management.</p>
-                    <ul>
-                        <li>Developed real-time order tracking and updates using Hangfire, Background Workers, and Socket.IO.</li>
-                        <li>Applied advanced design patterns (Strategy, Provider, Builder) to make business logic easily extendable for change requests and integrated the Observer Pattern to enable dynamic generation of cutting docket print files.</li>
-                        <li>Maintained and extended the Costing Sheet Module, including formula updates, flow logic adjustments, and data synchronization.</li>
-                        <li>Supported Warehouse module with barcode/QR code generation, and automated stock-in/out via SQL stored procedures.</li>
-                        <li>Implemented Finance module with automated Excel/PDF export features using Epplus.</li>
-                    </ul>
                 </div>
 
-                <div class="cv-entry">
-                    <div class="cv-entry-header">
-                        <div class="cv-entry-main"><span class="cv-entry-title">Back-end API Developer</span> - <span class="cv-entry-company">Un-Available LTD, HCM</span></div>
-                        <div class="cv-entry-date">July 2024 - 2025</div>
+                <div class="cv-row">
+                    <div class="cv-row-left">11/2020 - 07/2023</div>
+                    <div class="cv-row-right">
+                        <div class="cv-item-title">Truong Minh Thinh Company</div>
+                        <div class="cv-item-subtitle">Full-stack Developer (TDesk)</div>
+                        <ul>
+                            <li>Explored, implemented, and deployed backend services using Node.js and .NET to handle real-time messaging and distributed ID generation (Snowflake).</li>
+                            <li>Designed database schema using Cassandra to optimize heavy write messaging alongside SQL Server and Elasticsearch.</li>
+                            <li>Integrated Firebase FCM to Angular and .NET to orchestrate push notifications.</li>
+                            <li>Optimized load time and runtime performance of web UI and developed reusable plugins using Angular Elements.</li>
+                        </ul>
                     </div>
-                    <p class="cv-entry-desc">Built a mobile-oriented API project as part of the larger ERP system, focusing on warehouse operations.</p>
-                    <ul>
-                        <li>Developed RESTFul APIs to manage data for lots, pallets, and warehouse locations using .NET 8, CQRS pattern, and MediatR.</li>
-                        <li>Maintained and optimized SQL queries and Redis caching to improve data retrieval performance for mobile clients.</li>
-                    </ul>
                 </div>
 
-                <div class="cv-entry">
-                    <div class="cv-entry-header">
-                        <div class="cv-entry-main"><span class="cv-entry-title">Full-stack Developer</span> - <span class="cv-entry-company">Truong Minh Thinh Company, HCM</span></div>
-                        <div class="cv-entry-date">Nov 2020 - July 2023</div>
+                <div class="cv-row">
+                    <div class="cv-row-left">07/2022 - 07/2023</div>
+                    <div class="cv-row-right">
+                        <div class="cv-item-title">Truong Minh Thinh Company</div>
+                        <div class="cv-item-subtitle">Back-end Developer (LiveApp)</div>
+                        <ul>
+                            <li>Implemented core engagement features including live video view counts, comments, and posts using ABP Framework and Socket.IO.</li>
+                            <li>Integrated chat service interoperability between TDesk and LiveApp to facilitate order creation and confirmation.</li>
+                            <li>Built and managed CI/CD pipelines deploying services via Docker and Helm Charts to Kubernetes (K8s) clusters.</li>
+                        </ul>
                     </div>
-                    <p class="cv-entry-desc">Developed an all-in-one conversational platform connecting customers and businesses seamlessly.</p>
-                    <ul>
-                        <li>Explored, implemented, and deployed backend services using Node.js and .NET to handle real-time messaging and distributed ID generation (Snowflake).</li>
-                        <li>Designed database schema using Cassandra to optimize heavy write messaging alongside SQL Server and Elasticsearch.</li>
-                        <li>Integrated Firebase FCM to Angular and .NET to orchestrate push notifications.</li>
-                        <li>Optimized load time and runtime performance of web UI and developed reusable plugins using Angular Elements.</li>
-                    </ul>
-                </div>
-
-                <div class="cv-entry">
-                    <div class="cv-entry-header">
-                        <div class="cv-entry-main"><span class="cv-entry-title">Back-end Developer</span> - <span class="cv-entry-company">Truong Minh Thinh Company, HCM</span></div>
-                        <div class="cv-entry-date">July 2022 - July 2023</div>
-                    </div>
-                    <p class="cv-entry-desc">Contributed to LiveApp, a livestream platform empowering sellers to display and sell products directly to customers.</p>
-                    <ul>
-                        <li>Implemented core engagement features including live video view counts, comments, and posts using ABP Framework and Socket.IO.</li>
-                        <li>Integrated chat service interoperability between TDesk and LiveApp to facilitate order creation and confirmation.</li>
-                        <li>Built and managed CI/CD pipelines deploying services via Docker and Helm Charts to Kubernetes (K8s) clusters.</li>
-                    </ul>
                 </div>
             </div>
 
             <!-- EDUCATION -->
-            <div class="lapis-section">
-                <h2 class="lapis-section-title">
-                    <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-                    Education
-                </h2>
-                <div class="cv-entry">
-                    <div class="cv-entry-header">
-                        <div class="cv-entry-main"><span class="cv-entry-title">Bachelor's Degree in Information Technology</span> - <span class="cv-entry-company">VNUHCM - University of Science</span></div>
-                        <div class="cv-entry-date">Ho Chi Minh City, Vietnam</div>
+            <div class="cv-section">
+                <div class="cv-section-title">Education</div>
+                <div class="cv-row">
+                    <div class="cv-row-left">Graduated</div>
+                    <div class="cv-row-right">
+                        <div class="cv-item-title">VNUHCM - University of Science</div>
+                        <div class="cv-item-subtitle">Major: Information Technology</div>
+                        <ul>
+                            <li>Bachelor's Degree</li>
+                            <li>GPA: 7.7/10</li>
+                        </ul>
                     </div>
-                    <p class="cv-entry-desc"><strong>GPA: 7.7/10</strong></p>
+                </div>
+            </div>
+
+            <!-- SKILLS -->
+            <div class="cv-section">
+                <div class="cv-section-title">Skills</div>
+                <div class="cv-row">
+                    <div class="cv-row-left" style="font-weight: 700;">Technologies</div>
+                    <div class="cv-row-right">
+                        <ul>
+                            <li>.NET 6/8/9, ASP.NET Core, Angular, NodeJS, NestJS</li>
+                            <li>Kubernetes (K3s), Docker, Kafka, Socket.IO, Firebase FCM, EPPlus, Tailwind CSS</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cv-row">
+                    <div class="cv-row-left" style="font-weight: 700;">Data Systems</div>
+                    <div class="cv-row-right">
+                        <ul>
+                            <li>SQL Server, PostgreSQL, Redis, Elasticsearch</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cv-row">
+                    <div class="cv-row-left" style="font-weight: 700;">Architecture</div>
+                    <div class="cv-row-right">
+                        <ul>
+                            <li>Modular Monolith, Microservices, Domain-Driven Design (DDD), CQRS, SOLID, OOP, Design Patterns</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- OIDC Config (từ K8s ConfigMap — xem cv-auth-config.yaml) -->
+    <!-- OIDC Config -->
     <script src="config.js"></script>
-    <!-- OIDC Auth Module -->
     <script src="auth.js"></script>
 </body>
 </html>

@@ -1,472 +1,246 @@
 /* ═══════════════════════════════════════════════════════════════
-   Dragon CV — Styles
-   
-   Cấu trúc:
-   1. Design tokens (CSS variables)
-   2. Reset & base
-   3. Login gate (SSO login screen)
-   4. User bar (authenticated header)
-   5. CV content (portfolio)
-   6. Responsive breakpoints
+   Long Pham CV — Styles (TopCV Style)
    ═══════════════════════════════════════════════════════════════ */
 
-/* ── 1. Design Tokens ─────────────────────────────────────── */
 :root {
-    --bg: #f4efe7;
-    --panel: rgba(255, 255, 255, 0.78);
-    --panel-strong: #1f2937;
-    --text: #18212e;
-    --muted: #556274;
-    --accent: #b45309;
-    --accent-soft: #f59e0b;
-    --accent-glow: rgba(245, 158, 11, 0.3);
-    --line: rgba(24, 33, 46, 0.08);
-    --shadow: 0 20px 60px rgba(24, 33, 46, 0.12);
-    --radius-sm: 12px;
-    --radius-md: 18px;
-    --radius-lg: 24px;
-    --radius-xl: 28px;
-    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --text-color: #1a1a1a;
+    --border-color: #000000;
+    --bg-color: #f3f4f6;
+    --font-main: 'Arial', sans-serif; 
+    
+    /* Login variables */
+    --login-bg: #0f172a;
+    --login-primary: #f59e0b;
+    --login-primary-hover: #d97706;
 }
 
-/* ── 2. Reset & Base ──────────────────────────────────────── */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
-    color: var(--text);
-    background:
-        radial-gradient(circle at top left, rgba(180, 83, 9, 0.22), transparent 30%),
-        radial-gradient(circle at top right, rgba(31, 41, 55, 0.14), transparent 28%),
-        linear-gradient(180deg, #fbf7f1 0%, var(--bg) 100%);
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
+    font-family: var(--font-main);
+    color: var(--text-color);
+    background: var(--bg-color);
+    line-height: 1.5;
+    font-size: 14px;
 }
 
-/* ── 3. Login Gate ────────────────────────────────────────── */
+/* ── LOGIN GATE ────────────────────────────────────────── */
 .login-gate {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
+    position: fixed; inset: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--login-bg);
     overflow: hidden;
-}
-
-/* Animated background particles */
-.login-particles {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.login-particles span {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent-soft);
-    opacity: 0.15;
-    animation: float 15s infinite ease-in-out;
-}
-
-.login-particles span:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 18s; }
-.login-particles span:nth-child(2) { left: 75%; top: 15%; animation-delay: 2s; width: 8px; height: 8px; }
-.login-particles span:nth-child(3) { left: 40%; top: 70%; animation-delay: 4s; animation-duration: 20s; }
-.login-particles span:nth-child(4) { left: 85%; top: 60%; animation-delay: 6s; width: 4px; height: 4px; }
-.login-particles span:nth-child(5) { left: 20%; top: 80%; animation-delay: 8s; width: 10px; height: 10px; opacity: 0.08; }
-.login-particles span:nth-child(6) { left: 60%; top: 40%; animation-delay: 3s; animation-duration: 22s; }
-
-@keyframes float {
-    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.15; }
-    25% { transform: translate(30px, -40px) scale(1.3); opacity: 0.25; }
-    50% { transform: translate(-20px, 20px) scale(0.8); opacity: 0.1; }
-    75% { transform: translate(40px, 30px) scale(1.1); opacity: 0.2; }
 }
 
 .login-card {
     position: relative;
-    width: min(420px, calc(100% - 32px));
-    padding: 48px 40px;
-    border-radius: var(--radius-xl);
-    background: rgba(30, 41, 59, 0.6);
-    border: 1px solid rgba(148, 163, 184, 0.1);
-    backdrop-filter: blur(24px);
+    width: min(400px, calc(100% - 32px));
+    padding: 40px;
+    border-radius: 12px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     text-align: center;
-    animation: cardAppear 0.6s ease-out;
-}
-
-@keyframes cardAppear {
-    from { opacity: 0; transform: translateY(20px) scale(0.96); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.login-logo {
-    margin-bottom: 24px;
-}
-
-.login-logo svg {
-    filter: drop-shadow(0 4px 12px var(--accent-glow));
 }
 
 .login-title {
-    color: #f1f5f9;
+    color: #f8fafc;
     font-size: 1.5rem;
-    font-weight: 800;
+    font-weight: 700;
     margin-bottom: 8px;
-    letter-spacing: -0.02em;
 }
 
 .login-subtitle {
     color: #94a3b8;
     font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 
-.login-error {
-    display: none;
-    color: #f87171;
-    font-size: 0.85rem;
-    margin-bottom: 16px;
-    padding: 10px 16px;
-    border-radius: var(--radius-sm);
-    background: rgba(248, 113, 113, 0.1);
-    border: 1px solid rgba(248, 113, 113, 0.2);
+.login-hint {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 24px;
+    text-align: left;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
+.login-hint code {
+    background: #1e293b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #60a5fa;
+    font-family: monospace;
 }
 
 .login-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 16px 24px;
-    border: none;
-    border-radius: var(--radius-md);
-    background: linear-gradient(135deg, var(--accent-soft), var(--accent));
-    color: #fff;
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all var(--transition);
-    justify-content: center;
-    box-shadow: 0 4px 16px var(--accent-glow);
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 14px;
+    border: none; border-radius: 8px;
+    background: var(--login-primary); color: #fff;
+    font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: background 0.2s;
+}
+.login-btn:hover { background: var(--login-primary-hover); }
+
+.login-error {
+    display: none; color: #f87171; font-size: 0.85rem; margin-bottom: 16px;
 }
 
-.login-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px var(--accent-glow);
-    filter: brightness(1.1);
-}
-
-.login-btn:active {
-    transform: translateY(0);
-}
-
-.login-footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 24px;
-    color: #475569;
-    font-size: 0.75rem;
-}
-
-/* ── 4. User Bar ──────────────────────────────────────────── */
+/* ── USER BAR ──────────────────────────────────────────── */
 .user-bar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 24px;
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-    animation: slideDown 0.4s ease-out;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 24px; background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
-
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-100%); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
+.user-info { display: flex; align-items: center; gap: 12px; }
 .user-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--accent-soft), var(--accent));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-weight: 800;
-    font-size: 0.9rem;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--login-primary); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-weight: bold;
 }
-
-.user-name {
-    color: #f1f5f9;
-    font-weight: 700;
-    font-size: 0.9rem;
-}
-
-.user-email {
-    color: #64748b;
-    font-size: 0.75rem;
-}
-
+.user-name { font-weight: 600; color: #1e293b; }
+.user-email { font-size: 0.8rem; color: #64748b; }
 .logout-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    border-radius: var(--radius-sm);
-    background: transparent;
-    color: #94a3b8;
-    font-family: inherit;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition);
+    padding: 8px 16px; border: 1px solid #e2e8f0; border-radius: 6px;
+    background: transparent; color: #64748b; cursor: pointer;
 }
+.logout-btn:hover { background: #f1f5f9; color: #0f172a; }
 
-.logout-btn:hover {
-    color: #f87171;
-    border-color: rgba(248, 113, 113, 0.3);
-    background: rgba(248, 113, 113, 0.1);
-}
-
-/* ── 5. CV Content ────────────────────────────────────────── */
-/* ── 5. CV Content ────────────────────────────────────────── */
-body:has(.cv-content[style=""]) {
-    background: #f3f4f6 !important;
-}
-
+/* ── CV CONTENT ────────────────────────────────────────── */
 .cv-content {
-    animation: fadeIn 0.5s ease-out;
-    padding: 40px 20px 80px;
+    padding: 40px 20px;
     min-height: 100vh;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.lapis-document {
-    width: 210mm;
+.cv-document {
+    width: 210mm; /* A4 width */
     max-width: 100%;
     margin: 0 auto;
-    padding: 30mm 20mm;
+    padding: 20mm;
     background: #ffffff;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
-    border-radius: 4px;
-    
-    /* Elegant LapisCV Variables */
-    --color-accent: #5e84c9; /* Beautiful light blue matching Octocat ref */
-    --color-text-main: #374151;
-    --color-text-muted: #6b7280;
-    --color-heading: #1f2937;
-    --border-divider: #dae3ea;
-    
-    color: var(--color-text-main);
-    font-size: 14.5px;
-    line-height: 1.65;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Header Area */
-.cv-header-layout {
+/* CV Header */
+.cv-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 32px;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+.cv-header-photo {
+    width: 120px;
+    height: 160px;
+    object-fit: cover;
+    background: #e2e8f0;
+}
+.cv-header-photo-placeholder {
+    width: 120px;
+    height: 160px;
+    background: #e2e8f0;
 }
 .cv-header-info {
     flex: 1;
 }
 .cv-header-info h1 {
-    font-family: 'Source Serif 4', serif;
-    font-size: 42px;
-    color: var(--color-heading);
-    margin: 0 0 16px 0;
+    font-size: 28px;
     font-weight: 700;
-    line-height: 1.1;
+    margin-bottom: 4px;
 }
-
-/* Contact Badges */
-.cv-contact {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    font-size: 13px;
-    color: var(--color-text-main);
+.cv-header-info h2 {
+    font-size: 16px;
     font-weight: 500;
+    margin-bottom: 12px;
 }
-.cv-contact div {
+.cv-header-details {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    gap: 4px;
 }
-.cv-contact svg {
-    width: 15px;
-    height: 15px;
-    fill: none;
-    stroke: var(--color-accent);
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.cv-header-details div {
+    display: flex;
 }
-.cv-contact a {
-    color: var(--color-text-main);
+.cv-header-details span.label {
+    font-weight: 700;
+    min-width: 80px;
+}
+.cv-header-details span.val a {
+    color: #1a1a1a;
     text-decoration: none;
-    transition: color 0.15s ease;
 }
-.cv-contact a:hover {
-    color: var(--color-accent);
-}
-
-.cv-avatar {
-    margin-left: 24px;
-}
-.cv-avatar div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: #eff4fa;
-    border: 2px solid #e2e8f0;
-    color: var(--color-accent);
+.cv-header-details span.val a:hover {
+    text-decoration: underline;
 }
 
-/* Lapis Section Styling */
-.lapis-section {
-    margin-bottom: 28px;
+/* Sections */
+.cv-section {
+    margin-bottom: 24px;
 }
-.lapis-section-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 20px;
-    color: var(--color-accent);
-    font-family: 'Source Serif 4', serif;
-    font-weight: 600;
-    margin: 0 0 16px 0;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-divider);
-}
-.lapis-section-title svg {
-    width: 22px;
-    height: 22px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-}
-
-/* Entry Styling for Work / Edu */
-.cv-entry {
-    margin-bottom: 20px;
-}
-.cv-entry-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 6px;
-}
-.cv-entry-main {
-    flex: 1;
-    padding-right: 16px;
-}
-.cv-entry-title {
+.cv-section-title {
+    font-size: 18px;
     font-weight: 700;
-    color: var(--color-heading);
-    font-size: 15px;
-}
-.cv-entry-company {
-    font-weight: 600;
-    color: var(--color-text-main);
-    font-size: 15px;
-}
-.cv-entry-date {
-    font-size: 13.5px;
-    color: var(--color-text-muted);
-    font-weight: 500;
-    white-space: nowrap;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 16px;
+    padding-bottom: 4px;
 }
 
-.cv-entry-desc {
-    margin: 0 0 8px 0;
-    color: var(--color-text-main);
-    text-align: justify;
+/* Flex Row Entries */
+.cv-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 16px;
 }
-
-/* Lists and Bullets */
-.lapis-document ul {
-    list-style-type: none;
-    padding-left: 20px;
-    margin: 0;
-}
-.lapis-document li {
-    position: relative;
-    margin-bottom: 6px;
-    color: var(--color-text-main);
-    text-align: justify;
-}
-.lapis-document li::before {
-    content: "•";
-    position: absolute;
-    left: -14px;
-    color: var(--color-text-main); /* Match text */
+.cv-row-left {
+    flex: 0 0 130px;
     font-size: 14px;
 }
-.lapis-document li strong {
-    color: var(--color-heading);
-    font-weight: 600;
+.cv-row-right {
+    flex: 1;
 }
-.lapis-document p {
+
+.cv-item-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+.cv-item-subtitle {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+/* Lists */
+.cv-document ul {
+    list-style-type: disc;
+    padding-left: 18px;
+    margin: 4px 0;
+}
+.cv-document li {
+    margin-bottom: 4px;
     text-align: justify;
 }
 
-/* ── 6. Responsive ────────────────────────────────────────── */
-@media (max-width: 900px) {
-    .login-card {     padding: 32px 24px; }
-    .user-bar {       padding: 10px 16px; }
-    .cv-content {     padding: 20px 10px 40px; }
-    .lapis-document { padding: 20mm 15mm; }
+/* Skills/References layout customization */
+.cv-skills-grid {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 16px;
+}
+.cv-skills-label {
+    flex: 0 0 130px;
+    font-weight: 700;
 }
 
+/* Responsive */
 @media (max-width: 600px) {
-    .cv-header-layout {
-        flex-direction: column-reverse;
-        align-items: flex-start;
-        gap: 20px;
-    }
-    .cv-avatar { margin-left: 0; }
-    .cv-entry-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .cv-entry-date {
-        margin-top: 4px;
-    }
+    .cv-header { flex-direction: column; }
+    .cv-row { flex-direction: column; gap: 8px; }
+    .cv-row-left { flex: auto; font-weight: 700; }
+    .cv-skills-grid { flex-direction: column; gap: 8px; }
+    .cv-document { padding: 15px; }
 }
 
+body:has(.cv-content) { background: var(--bg-color); }
