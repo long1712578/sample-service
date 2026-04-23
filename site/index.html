@@ -5,39 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pham Dinh Long | Senior Back-end Engineer</title>
     <meta name="description" content="Senior .NET Back-end Engineer with experience in enterprise systems, ABP Framework, distributed systems, and Kubernetes delivery.">
-    <link rel="stylesheet" href="styles.css?v=202604191630">
+    <link rel="stylesheet" href="styles.css?v=202604231125">
 </head>
 <body>
 
     <!-- ════════════════════════════════════════════════════════════
-         PREMIUM LOGIN GATE
+         FUTURISTIC LOGIN GATE (Dragon SSO)
          ════════════════════════════════════════════════════════════ -->
     <div id="login-gate" class="login-gate">
-        <div class="login-card">
+        <div class="login-mesh"></div>
+        <div class="login-card fade-in">
+            <div class="login-logo-wrap">
+                <div class="dragon-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+            </div>
             <h2 class="login-title">Digital Portfolio</h2>
-            <p class="login-subtitle">Secure access required via Dragon SSO</p>
+            <p class="login-subtitle">Secured by <span>Dragon SSO</span> Gateway</p>
             
             <div class="login-hint">
                 <div class="login-hint-title">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                    Demo Access Keys
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    CRITICAL ACCESS ONLY
                 </div>
-                <div class="hint-row">
-                    <span>Admin User</span>
-                    <code>admin</code>
-                </div>
-                <div class="hint-row">
-                    <span>Password</span>
-                    <code>1q2w3E*</code>
+                <div class="hint-grid">
+                    <div class="hint-col">
+                        <label>IDENTITY</label>
+                        <code>admin</code>
+                    </div>
+                    <div class="hint-col">
+                        <label>PASSPHRASE</label>
+                        <code>1q2w3E*</code>
+                    </div>
                 </div>
             </div>
 
             <p class="login-error" id="login-error"></p>
             
             <button class="login-btn" onclick="login()" id="login-button">
-                Authenticate Securely
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <span>AUTHENTICATE</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </button>
+
+            <div class="login-footer">
+                <span class="pulse-dot"></span>
+                System Status: Operational
+            </div>
         </div>
     </div>
 
@@ -52,7 +65,7 @@
                 <div class="user-email" id="user-email">guest@example.com</div>
             </div>
         </div>
-        <button class="logout-btn" onclick="logout()" id="logout-button">End Session</button>
+        <button class="logout-btn" onclick="logout()" id="logout-button">END SESSION</button>
     </div>
 
     <!-- ════════════════════════════════════════════════════════════
