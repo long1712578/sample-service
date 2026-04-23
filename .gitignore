@@ -1,0 +1,18 @@
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build & Dependencies
+node_modules/
+dist/
+build/
+*.log
+
+# Docker
+.dockerignore
